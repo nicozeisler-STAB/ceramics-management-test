@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Second Bisque</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init('KcsAfjLzWu6grZMjK')
+  </script>
+  <script type="module">
+    import {showItems} from './admin.js';
+    window.showItems = showItems;
+  </script>
+  <script type="module">
+    import {adminAuthenticate} from './authentication.js'
+    window.adminAuthenticate = adminAuthenticate
+  </script>
+</head>
+<body onload="adminAuthenticate(); showItems('secondBisque');">
+  <ul>
+    <li><a href="firstBisque.html">First Bisque</a></li>
+    <li class="current"><a href="secondBisque.html">Second Bisque</a></li>
+    <li><a href="glaze.html">Glaze</a></li>
+    <li><a href="firing.html">Firing</a></li>
+    <li><a href="artShow.html">Art Show</a></li>
+    <li><a href="stats.html">Stats</a></li>
+  </ul>
+  <div class="bottom">
+    <div id="infoColumn" class="infoColumn">
+        <h2 id="filler">No Existing Projects</h2>
+    </div>
+  </div>
+</body>
+</html>

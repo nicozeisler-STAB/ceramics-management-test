@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link rel="stylesheet" href="form.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="module" src="form.js"></script>
+  <script type="module">
+    import {addItem, addArtShow} from './form.js'
+    window.addItem = addItem
+    window.addArtShow = addArtShow
+  </script>
+  <script type="module">
+    import {authenticate, logout} from './authentication.js'
+    window.authenticate = authenticate
+    window.logout = logout
+  </script>
+    <div class="center2" id="center2">
+    <div class="username">
+      <button type="button" style="width:5%;margin-right:22%;" onclick="logout()"> 
+        <img src="user.jpg">
+        Log Out
+      </button>
+      <p id="username"></p>
+    </div>
+  </div>
+</head>
+<body onload="authenticate()">
+  <div class="box">
+    <label for="firingTypes">Choose firing type:</label>
+    <select id="firingTypes" name="firingTypes" onchange="addArtShow()">
+      <option value="firstBisque">First Bisque</option>
+      <option value="secondBisque">Second Bisque</option>
+      <option value="glaze">Glaze</option>
+    </select>
+    <br>
+    <label>Signature</label>
+    <input type="text" id="signature" placeholder="Signature">
+    <br>
+    <label>Image</label>
+    <input
+        type="file"
+        id="image"
+        name="image"
+        accept=".jpg, .jpeg, .png"/>
+    <br>
+    <div id="artShowContainer"></div>
+    </select>
+    <button type="submit" onclick="addItem()">Submit</button>
+  </div>
+</body>
+</html>
+

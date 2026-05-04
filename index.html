@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init('KcsAfjLzWu6grZMjK')
+  </script>
+  <script type="module">
+    import {updateFirings, clearFirings} from './admin.js';
+    window.updateFirings = updateFirings;
+    window.clearFirings = clearFirings;
+  </script>
+  <script type="module">
+    import {login} from './authentication.js';
+    window.login = login;
+  </script>
+</head>
+<body onload="updateFirings()">
+  <h2 class="sectionTitle"><span>Login</span></h2>
+  <br>
+  <div class="box">
+    <label>Email</label>
+    <input type="text" id="email" placeholder="Your Email">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Your Password">
+    <button type="submit" onclick="login()">Login</button>
+  </div>
+  <div id="box2" class="box">
+    <p>Don't have an account?</p>
+    <button type="submit" class="signup" onclick="window.location.href='signup.html'">Sign Up</button>
+  </div>
+</body>
+</html>

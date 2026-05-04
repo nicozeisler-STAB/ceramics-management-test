@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="module">
+    import {showItems} from './admin.js';
+    window.showItems = showItems;
+  </script>
+  <script type="module">
+    import {adminAuthenticate} from './authentication.js'
+    window.adminAuthenticate = adminAuthenticate
+  </script>
+</head>
+<body onload="adminAuthenticate(); showItems('stats');">
+    <ul>
+      <li><a href="firstBisque.html">First Bisque</a></li>
+      <li><a href="secondBisque.html">Second Bisque</a></li>
+      <li><a href="glaze.html">Glaze</a></li>
+      <li><a href="firing.html">Firing</a></li>
+      <li><a href="artShow.html">Art Show</a></li>
+      <li class="current"><a href="stats.html">Stats</a></li>
+    </ul>
+
+  <div class="bottom">
+    <div id="infoColumn" class="infoColumn"></div>
+  </div>
+</body>
+</html>

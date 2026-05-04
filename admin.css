@@ -1,0 +1,144 @@
+/*Style for all the admin pages: "firstBisque", "secondBisque", "glaze", "firing", "artShow*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*formatting the entire page*/
+body {
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  justify-content: center;
+}
+
+/*formatting the div that contains everything below the nav bar*/
+.bottom{
+  margin-top: 9%;
+  width: 100vw;
+  height: 100vh;
+ }
+
+
+/*formatting the nav bar*/
+ul {
+    background-color: rgba(117, 211, 243, 0.328);
+    width: 55%;
+    position: fixed;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    gap: 1%;
+    box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.172);
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+/*formatting the individual buttons on the nav bar*/
+ul li a {
+
+    display: flex;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 20px 20px;
+    font-size: 30px;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: color .4s ease, background-color .4s ease, transform .4s ease;
+
+}
+
+ul li a:hover {
+  transform: translateY(-10%);
+  color: white;
+  background-color: rgba(3, 41, 54, 0.228);
+}
+
+/*making the button for the current page remain deleted on the nav bar*/
+.current{
+  border-radius: 20px;
+  background-color: rgba(3, 41, 54, 0.228);
+  transition: background-color .3s ease;
+}
+
+.current:hover{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/*formtting the div that contains the students' submission cards*/
+#infoColumn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;              
+  margin: 3rem auto 0 auto;
+  width: 40%; 
+  padding-bottom: 9%;
+
+}
+
+/*formatting the students' submission cards*/
+.info-box {
+  background-color: rgba(117, 211, 243, 0.328);
+  border-radius: 8px 20px 8px 20px;
+  padding: 1rem;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  transition: background-color .7s ease;
+  transition: box-shadow .6s ease;
+  text-align: center;
+  justify-items: center;
+  width: 100%; 
+
+}
+
+.statBox {
+  background-color: rgba(117, 211, 243, 0.328);
+  border-radius: 8px 20px 8px 20px;
+  padding: 1rem;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  transition: background-color .7s ease;
+  transition: box-shadow .6s ease;
+  text-align: center;
+  justify-items: center;
+  width: 100%; 
+}
+
+.info-box:hover {
+  box-shadow:
+    5px 5px 0 #ac80a068,
+    10px 10px 0 #0470a643,
+    15px 15px 0 rgba(117, 211, 243, 0.403);
+}
+
+/*formatting the title text on the students' cards*/
+.info-title {
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 0.5rem;
+}
+
+/*formatting the "start firing" and "reject request" buttons*/
+button{
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.172);
+  transition: transform .3s;
+  display: block;
+  font-size: 20px;
+}
+
+button:hover{
+  transform: translateY(-20%);
+}
+
+.trigger{
+  margin: 2%;
+}

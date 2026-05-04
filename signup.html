@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignUp</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="module">
+    import {signup} from './authentication.js';
+    window.signup = signup;
+  </script>
+</head>
+<body>
+  <div class="box">
+    <label>Full Name</label>
+    <input type="text" id="name" placeholder="Your Name">
+    <label>Email</label>
+    <input type="text" id="email" placeholder="Your Email">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Your Password">
+    <button type="submit" onclick="signup()">Submit</button>
+  </div>
+</body>
+</html>
