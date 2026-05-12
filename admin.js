@@ -2,13 +2,12 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-
 import {getFirestore, collection, doc, getDocs, query, where, setDoc, getDoc, updateDoc, addDoc, deleteDoc, orderBy, serverTimestamp} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAOfNj92YHafyu2sAdYSSsAPf5RcxZ2wg",
-  authDomain: "ceramicsstudio-deb67.firebaseapp.com",
-  projectId: "ceramicsstudio-deb67",
-  storageBucket: "ceramicsstudio-deb67.firebasestorage.app",
-  messagingSenderId: "1089998700895",
-  appId: "1:1089998700895:web:03a77d724f88b03b8736ea",
-  measurementId: "G-Q1W9FR3Z8C"
+  apiKey: "AIzaSyDkByrSinwKhhvwP9kxCv-A8GKtUwjpa1s",
+  authDomain: "ceramicsstudiodev.firebaseapp.com",
+  projectId: "ceramicsstudiodev",
+  storageBucket: "ceramicsstudiodev.firebasestorage.app",
+  messagingSenderId: "506800538897",
+  appId: "1:506800538897:web:a43e49999a29012e0978b0"
 }
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
@@ -29,7 +28,7 @@ export const showItems = async function(firingType) {
   */ 
   if (firingType == "stats") {
     const column = document.getElementById("infoColumn")
-    const results = await getDocs(query(collection(db, "accounts"), orderBy("numGlaze", "desc")))
+    const results = await getDocs(query(collection(db, "accounts"), orderBy("leaderboard", "desc")))
     results.forEach(item => {
       const itemInfo = item.data()
       const box = document.createElement("div")
@@ -98,17 +97,26 @@ export const showItems = async function(firingType) {
       if (firingType == "firstBisque") {
         const snap = await getDocs(query(collection(db, "accounts"), where("name", "==", info.studentName)))
         const ittem = snap.docs[0]
-        await updateDoc(doc(db, "accounts", ittem.id), { num1stB: ittem.data().num1stB + 1 })
+        await updateDoc(doc(db, "accounts", ittem.id), { 
+          num1stB: ittem.data().num1stB + 1,
+          leaderboard: ittem.data().leaderboard + 0.75
+        })
       }
       else if (firingType == "secondBisque") {
         const snap = await getDocs(query(collection(db, "accounts"), where("name", "==", info.studentName)))
         const ittem = snap.docs[0]
-        await updateDoc(doc(db, "accounts", ittem.id), { num2ndB: ittem.data().num2ndB + 1 })
+        await updateDoc(doc(db, "accounts", ittem.id), { 
+          num2ndB: ittem.data().num2ndB + 1,
+          leaderboard: ittem.data().leaderboard + 1
+        })
       }
       else if (firingType == "glaze") {
         const snap = await getDocs(query(collection(db, "accounts"), where("name", "==", info.studentName)))
         const ittem = snap.docs[0]
-        await updateDoc(doc(db, "accounts", ittem.id), { numGlaze: ittem.data().numGlaze + 1 })
+        await updateDoc(doc(db, "accounts", ittem.id), { 
+          numGlaze: ittem.data().numGlaze + 1,
+          leaderboard: ittem.data().leaderboard + 1.5
+        })
       }
       await deleteDoc(doc(db, firingType, item.id))
       location.reload()
