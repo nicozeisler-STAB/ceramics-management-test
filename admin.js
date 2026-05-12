@@ -29,14 +29,37 @@ export const showItems = async function(firingType) {
   */ 
   if (firingType == "stats") {
     const column = document.getElementById("infoColumn")
-    const results = await getDocs(query(collection(db, "accounts")))
+    const results = await getDocs(query(collection(db, "accounts"), orderBy("numGlaze", "desc")))
     results.forEach(item => {
       const itemInfo = item.data()
       const box = document.createElement("div")
       box.className = 'statBox'
-      box.innerHTML = itemInfo.name + "<br> Number of 1st Bisques: " + itemInfo.num1stB + "<br> Number of 2nd Bisques: " + itemInfo.num2ndB + "<br> Number of Glaze pieces: " + itemInfo.numGlaze
+      const nameRow = document.createElement('div')
+      const statRow = document.createElement('div')
+      statRow.className = 'statRow'
+      const name = document.createElement("h2")
+      name.className = 'statsName'
+      const stat1 = document.createElement("div")
+      stat1.className = 'statSection'
+      const stat2 = document.createElement("div")
+      stat2.className = 'statSection'
+      const stat3 = document.createElement("div")
+      stat3.className = 'statSection'
+
+      box.appendChild(nameRow)
+      box.appendChild(statRow)
+      nameRow.appendChild(name)
+      statRow.appendChild(stat1)
+      statRow.appendChild(stat2)
+      statRow.appendChild(stat3)
+
+      name.innerHTML = itemInfo.name
+      stat1.innerHTML = "Number of 1st bisques: <br>" + itemInfo.num1stB
+      stat2.innerHTML = "Number of 2nd bisques: <br>" + itemInfo.num2ndB 
+      stat3.innerHTML = "Number of glaze pieces: <br>" + itemInfo.numGlaze
       column.appendChild(box)
     })
+    return
   }
   const column = document.getElementById("infoColumn")
   const snapshot = await getDocs(query(collection(db, firingType), orderBy("createdAt", "asc")))
@@ -108,6 +131,12 @@ export const showItems = async function(firingType) {
       await emailjs.send("service_r0bpoq7", "template_j208swa", emailParams)
       location.reload()
     }
+
+    /**
+    *Lines 117-132 check if a student's submission box exists in the art show. 
+    *If it does not, it creates a "submit to art show" button which, when clicked, 
+    *will create an identical document in the art show and remove the button from that item.
+    */
     const artShowButton = document.createElement("button")
     artShowButton.innerHTML = "Submit to Art Show"
     artShowButton.onclick = async function() {
@@ -120,12 +149,13 @@ export const showItems = async function(firingType) {
       })
       artShowButton.remove()
     }
-    box.appendChild(startFiringButton)
-    box.appendChild(rejectButton)
-    const docSnap =  await getDoc(doc(db, "artShow", item.id));
+        const docSnap =  await getDoc(doc(db, "artShow", item.id));
     if(!docSnap.exists()){
       box.appendChild(artShowButton)
     }
+    
+    box.appendChild(startFiringButton)
+    box.appendChild(rejectButton)
     column.appendChild(box)
   }
 }

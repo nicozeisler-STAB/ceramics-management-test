@@ -15,14 +15,12 @@
     import {getStatus} from './status.js';
     window.getStatus = getStatus;
   </script>
-  <div class="center2" id="center2">
-    <div class="username">
-      <button class="button" type="button" style="width:5%;margin-right:5%;" onclick="logout()"> 
-        <img class="userImg" src="user.jpg">
-        Log Out
-      </button>
-      <p id="username"></p>
-    </div>
+  <div class="username">
+    <button class="button" type="button" style="width:5%;margin-right:5%;" onclick="logout()"> 
+      <img class="userImg" src="user.jpg">
+      Log Out
+    </button>
+    <p id="username"></p>
   </div>
 </head>
 <body onload="authenticate()">

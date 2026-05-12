@@ -17,14 +17,12 @@
     window.authenticate = authenticate
     window.logout = logout
   </script>
-    <div class="center2" id="center2">
-    <div class="username">
-      <button type="button" style="width:5%;margin-right:22%;" onclick="logout()"> 
-        <img src="user.jpg">
-        Log Out
-      </button>
-      <p id="username"></p>
-    </div>
+  <div class="username">
+    <button class="button" type="button" style="width:5%;margin-right:5%;" onclick="logout()"> 
+      <img class="userImg" src="user.jpg">
+      Log Out
+    </button>
+    <p id="username"></p>
   </div>
 </head>
 <body onload="authenticate()">
@@ -48,7 +46,7 @@
     <br>
     <div id="artShowContainer"></div>
     </select>
-    <button type="submit" onclick="addItem()">Submit</button>
+    <button class="submit" onclick="addItem()">Submit</button>
   </div>
 </body>
 </html>
