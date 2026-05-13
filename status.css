@@ -67,6 +67,7 @@ p {
 /*formats the area beneath the username and log out button*/
 body {
   position: relative;
+  background-image: url("ceramics-preview-02-o.avif");
 }
 
 /*formats the div that contains the box with the user's pottery image*/
