@@ -24,7 +24,7 @@ body {
 
 /*formatting the nav bar*/
 ul {
-    background-color: rgba(117, 211, 243, 0.328);
+    background-color: rgba(117, 211, 243, 0.1);
     width: 55%;
     position: fixed;
     padding-top: 1%;
@@ -57,7 +57,7 @@ ul li a {
 ul li a:hover {
   transform: translateY(-10%);
   color: white;
-  background-color: rgba(3, 41, 54);
+  background-color: rgba(3, 41, 54, 0.1);
 }
 
 /*making the button for the current page remain deleted on the nav bar*/
@@ -85,7 +85,7 @@ ul li a:hover {
 
 /*formatting the students' submission cards*/
 .info-box {
-  background-color: rgba(117, 211, 243);
+  background-color: rgba(117, 211, 243, 0.1);
   border-radius: 8px 20px 8px 20px;
   padding: 1rem;
   box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
@@ -103,7 +103,7 @@ ul li a:hover {
   font-size: 20px;
 }
 .statBox {
-  background-color: rgba(117, 211, 243);
+  background-color: rgba(117, 211, 243, 0.1);
   border-radius: 8px 20px 8px 20px;
   padding: 1rem;
   box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
@@ -131,7 +131,7 @@ ul li a:hover {
 
 .statSection{
   box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
-  background-color: rgba(117, 211, 243);
+  background-color: rgba(117, 211, 243, 0.1);
   border-radius: 10px;
   padding: 2%;
   margin: 5px;
