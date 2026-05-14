@@ -57,6 +57,9 @@ p {
   display: flex;
   gap: 0px;
   align-items: center;
+  background-color: rgba(117, 211, 243, 0.9);
+  box-shadow: 6px 7px 8px rgba(0, 0, 0, 0.172);
+  border-radius: 20px;
 }
 
 #username{
