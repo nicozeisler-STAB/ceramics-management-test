@@ -9,12 +9,16 @@
   display: flex;
   gap: 0px;
   align-items: center;
+  background-color: rgba(117, 211, 243, 0.9);
+  box-shadow: 6px 7px 8px rgba(0, 0, 0, 0.172);
+  border-radius: 20px;
 }
 
 #username{
   margin-left: 25%;
   font-size: 30px;
 }
+
 /*formats everyting belwo the logout button and username*/
 body {
   position: relative;
@@ -42,6 +46,7 @@ body {
   transition: box-shadow .3s ease;
   align-self: center;
 }
+
 .box:hover {
   box-shadow: 12px 14px 16px rgba(0, 0, 0, 0.172);
 }
