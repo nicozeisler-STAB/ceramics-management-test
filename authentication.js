@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"
-import {getFirestore, collection, addDoc, deleteDoc, getDocs, query, where, doc} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"
+import {getFirestore, collection, addDoc, setDoc, deleteDoc, getDocs, query, where, doc} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"
 
 const firebaseConfig = {
@@ -12,7 +12,7 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
+const auth = getAuth()
 /**
  * Student authenticate functions that checks the user's session storage for credentials
  * and sends them to the landing page if they are incorrect
