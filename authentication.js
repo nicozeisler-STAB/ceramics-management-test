@@ -1,5 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"
 import {getFirestore, collection, addDoc, deleteDoc, getDocs, query, where, doc} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDkByrSinwKhhvwP9kxCv-A8GKtUwjpa1s",
@@ -18,10 +19,11 @@ const db = getFirestore(app)
  * @author Nico Zeisler
  */
 export const authenticate = async function() {
-    const credentialed = sessionStorage.getItem("credentialed")
-    if (credentialed == null || credentialed != "we're in!") {
-        window.location.href = "index.html"
-    }
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = "index.html";
+        }
+    })
 }
 /**
  * Admin authenticate functions that checks the user's session storage for credentials
@@ -29,10 +31,11 @@ export const authenticate = async function() {
  * @author Nico Zeisler
  */
 export const adminAuthenticate = async function() {
-    const credentialed = sessionStorage.getItem("credentialed")
-    if (credentialed == null || credentialed != "we're in admin!") {
-        window.location.href = "index.html"
-    }
+    onAuthStateChanged(auth, (user) => {
+        if (!(user && user.email == "sbrodie@stab.org")) {
+            window.location.href = "index.html";
+        }
+    })
 }
 /**
  * Receives inputs from the form and searches for the provided email in the accounts database.
@@ -44,37 +47,32 @@ export const adminAuthenticate = async function() {
 export const login = async function() {
     const email = document.getElementById("email").value
     const password = document.getElementById("password").value
-    const snapshot = await getDocs(query(collection(db, "accounts"), where("email", "==", email)))
-    if (!snapshot.empty) {
-        for (const item of snapshot.docs) {
-          if (password == item.data().password) {                                                                                                                                                                                      if (!(testAlphaNum(item.data().name))) { await delAcc(item.id); return;} 
-                if (email == "sbrodie@stab.org") {
-                    sessionStorage.setItem("credentialed", "we're in admin!")
-                    window.location.href = "firstBisque.html"
-                }
-                else {
-                    studentLogin(item, email)
-                }
-            }
-            else {
-                alert("Invalid Password")
-            }
-        }  
-    }
-    else {
-        alert("Unrecognized email")
-    }
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user
+        if (email == "sbrodie@stab.org") {
+            window.location.href = "firstBisque.html"
+        }
+        else {
+            studentLogin(email)
+        }
+    })
+    .catch((error) => {
+        alert(error.message)
+        return
+    })
 }
 /**
  * Helper function to setup the user's session storage with the necessary data and credentials
  * and redirect them to the proper place depending on whether they currently have a submitted
  * piece or not. If their piece was rejected, it notifies them and then redirects them to the form.
  * @author Nico Zeisler
- * @param studentDoc - The Firebase document with the student's account 
  * @param {String} email - The student's email
  */
-async function studentLogin(studentDoc, email) {
+async function studentLogin(email) {
     const snap = await getDocs(query(collection(db, "rejected"), where("email", "==", email)))
+    const user = await getDocs(query(collection(db, "accounts"), where("email", "==", email)))
+    const name = user.docs[0].data().name
     if (!snap.empty) {
       for (const docSnap of snap.docs) {
         const reason = docSnap.data().text
@@ -82,8 +80,7 @@ async function studentLogin(studentDoc, email) {
         await deleteDoc(doc(db, "rejected", docSnap.id))
       }
       sessionStorage.setItem("email", email)
-      sessionStorage.setItem("name", studentDoc.data().name)
-      sessionStorage.setItem("credentialed", "we're in!")
+      sessionStorage.setItem("name", name)
       window.location.href = "form.html"
     }
     const firingTypes = ["glaze", "firstBisque", "secondBisque", "firing"]
@@ -91,16 +88,14 @@ async function studentLogin(studentDoc, email) {
         const snapshot = await getDocs(query(collection(db, firingType), where("email", "==", email)))
         if (!snapshot.empty) {
             sessionStorage.setItem("email", email);
-            sessionStorage.setItem("name", studentDoc.data().name);
+            sessionStorage.setItem("name", name);
             sessionStorage.setItem("firingType", firingType)
-            sessionStorage.setItem("credentialed", "we're in!")
             window.location.href = "status.html"
             return
         }
     }
     sessionStorage.setItem("email", email)
-    sessionStorage.setItem("name", studentDoc.data().name)
-    sessionStorage.setItem("credentialed", "we're in!")
+    sessionStorage.setItem("name", name)
     window.location.href = "form.html"
 }
 /**
@@ -121,34 +116,39 @@ export const signup = async function() {
       return
     }
     const password = document.getElementById("password").value
-    const snapshot = await getDocs(query(collection(db, "accounts"), where("email", "==", email)))
-    if (snapshot.empty) {
-      /**
-        * Added new paramters when an acount is created, for statistics later on (number of each piece)
-        * @author Will Elias
-      */
-      await addDoc(collection(db, "accounts"), {
-          name: username,
-          email: email,
-          password: password,
-          num1stB: 0,
-          num2ndB: 0,
-          numGlaze: 0,
-          leaderboard: 0
-      })
-      window.location.href = "index.html"
-    }
-    else {
-      alert("Email already taken")
-    } 
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(async (userCredential) => {
+        const user = userCredential.user;
+        await setDoc(doc(db, "accounts", user.uid), {
+            uid: user.uid,
+            email: user.email, 
+            name: username,
+            num1stB: 0,
+            num2ndB: 0,
+            numGlaze: 0,
+            leaderboard: 0
+        })
+        window.location.href = "index.html"
+    })
+    .catch((error) => {
+        alert(error.message)
+    });
 }
 /**
  * Utility to clear the user's session storage and redirect them to the landing page
  * @author Nico Zeisler
  */
 export const logout = async function() {
-    sessionStorage.clear()
-    window.location.href = "index.html"
+    signOut(auth)
+    .then(() => {
+        sessionStorage.clear()
+        window.location.href = "index.html"
+    })
+    .catch((error) => {
+        alert(error.message)
+        sessionStorage.clear()
+        window.location.href = "index.html"
+    });
 }
 /**
 * Utilities to test passwords and usernames and delete accounts who violate these conventions after the accounts
