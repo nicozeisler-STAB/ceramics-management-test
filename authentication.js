@@ -14,7 +14,7 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth()
 /**
- * Student authenticate functions that checks the user's session storage for credentials
+ * Student authenticate functions that checks the user's credentials using Firebase Auth
  * and sends them to the landing page if they are incorrect
  * @author Nico Zeisler
  */
@@ -26,7 +26,7 @@ export const authenticate = async function() {
     })
 }
 /**
- * Admin authenticate functions that checks the user's session storage for credentials
+ * Admin authenticate functions that checks the user's credentials using Firebase Auth
  * and sends them to the landing page if they are incorrect
  * @author Nico Zeisler
  */
@@ -38,10 +38,9 @@ export const adminAuthenticate = async function() {
     })
 }
 /**
- * Receives inputs from the form and searches for the provided email in the accounts database.
- * If the password matches any found student accounts it continues to studentLogin, otherwise it 
- * alerts for unrecognized email or invalid password. If the password and email match Ms. Brodie's,
- * it credentials the user and sends them to the first bisque page.
+ * Logs the user in using Firebase Authentication services. If the password matches any found student 
+ * accounts it continues to studentLogin, otherwise it alerts for unrecognized email or invalid password. 
+ * If the password and email match Ms. Brodie's, it credentials the user and sends them to the first bisque page.
  * @author Nico Zeisler
  */
 export const login = async function() {
@@ -101,7 +100,7 @@ async function studentLogin(email) {
 /**
  * Signup function that takes user input from the form for name and email and checks to 
  * see if they seem normal (i.e name is purely alphabetic) and alert otherwise. If everything
- * was acceptable it adds the account to the database and redirects the user to login
+ * was acceptable it adds the account to Firebase Auth and the accoutns database and redirects the user to login
  * @author Nico Zeisler
  */
 export const signup = async function() {
@@ -135,7 +134,7 @@ export const signup = async function() {
     });
 }
 /**
- * Utility to clear the user's session storage and redirect them to the landing page
+ * Utility to clear the user's session storage, revoke their credentials, and redirect them to the landing page
  * @author Nico Zeisler
  */
 export const logout = async function() {
