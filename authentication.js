@@ -78,20 +78,6 @@ async function studentLogin(email) {
         alert(reason)
         await deleteDoc(doc(db, "rejected", docSnap.id))
       }
-      sessionStorage.setItem("email", email)
-      sessionStorage.setItem("name", name)
-      window.location.href = "form.html"
-    }
-    const firingTypes = ["glaze", "firstBisque", "secondBisque", "firing"]
-    for (const firingType of firingTypes) {
-        const snapshot = await getDocs(query(collection(db, firingType), where("email", "==", email)))
-        if (!snapshot.empty) {
-            sessionStorage.setItem("email", email);
-            sessionStorage.setItem("name", name);
-            sessionStorage.setItem("firingType", firingType)
-            window.location.href = "status.html"
-            return
-        }
     }
     sessionStorage.setItem("email", email)
     sessionStorage.setItem("name", name)
