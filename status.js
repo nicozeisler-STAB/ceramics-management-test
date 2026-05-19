@@ -37,21 +37,16 @@ function userName() {
 export const getStatus = async function() {
   const email = sessionStorage.getItem("email")
   const firingType = sessionStorage.getItem("firingType")
-  const snapshot = await getDocs(query(collection(db, firingType), where("email", "==", email)))
-  snapshot.forEach((doc) => {
-    const status = doc.data().status
-    if (status == "unfired") {
+  const firingTypes = ["glaze", "firstBisque", "secondBisque", "firing"]
+  for (const firingType of firingTypes) {
+    const snapshot = await getDocs(query(collection(db, firingType), where("email", "==", email)))
+    snapshot.forEach((doc) => {
       const divVar2 = document.getElementById("centerbox")
       divVar2.textContent = "Your piece has been submitted."
-    }
-    if (status == "firing") {
-      const divVar2 = document.getElementById("centerbox")
-      divVar2.textContent = "Your piece is firing."
-    }
-    const img = doc.data().image
-    drawFileOnCanvas(dataURLtoFile(img, "image.png"))
-    sessionStorage.setItem("credentialed", null)
-  })
+      const img = doc.data().image
+      drawFileOnCanvas(dataURLtoFile(img, "image.png"))
+    })
+  }  
 }
 
 function drawFileOnCanvas(file) {
