@@ -65,6 +65,7 @@ export const showItems = async function(firingType) {
     const name = document.creatElement("div")
     name.innerHTML = "Will"
     //const img = document.creatElement("div")
+    return
   }
   const column = document.getElementById("infoColumn")
   const snapshot = await getDocs(query(collection(db, firingType), orderBy("createdAt", "asc")))
