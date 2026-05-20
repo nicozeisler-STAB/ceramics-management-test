@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firing</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="blueLogo.png" type="image/png">
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init('KcsAfjLzWu6grZMjK')
+  </script>
+  <script type="module">
+    import {showFirings} from './admin.js';
+    window.showFirings = showFirings;
+  </script>
+  <script type="module">
+    import {adminAuthenticate} from './authentication.js'
+    window.adminAuthenticate = adminAuthenticate
+  </script>
+</head>
+<body onload="adminAuthenticate(); showFirings()">
+  <ul>
+    <li><a href="firstBisque.html">First Bisque</a></li>
+    <li><a href="secondBisque.html">Second Bisque</a></li>
+    <li><a href="glaze.html">Glaze</a></li>
+    <li class="current"><a href="firing.html">Firing</a></li>
+    <li><a href="artShow.html">Art Show</a></li>
+    <li><a href="stats.html">Stats</a></li>
+    <li><a href="aboutMe.html">About Me</a></li>
+  </ul>
+  <div class="bottom">
+    <div id="infoColumn" class="infoColumn">
+    </div>
+  </div>
+</body>
+</html>
