@@ -12,15 +12,11 @@
     emailjs.init('KcsAfjLzWu6grZMjK')
   </script>
   <script type="module">
-    import {showFirings} from './admin.js';
-    window.showFirings = showFirings;
-  </script>
-  <script type="module">
     import {adminAuthenticate} from './authentication.js'
     window.adminAuthenticate = adminAuthenticate
   </script>
 </head>
-<body onload="adminAuthenticate(); showFirings()">
+<body onload="adminAuthenticate()">
   <ul>
     <li><a href="firstBisque.html">First Bisque</a></li>
     <li><a href="secondBisque.html">Second Bisque</a></li>
