@@ -60,13 +60,6 @@ export const showItems = async function(firingType) {
     })
     return
   }
-  if (firingType == "aboutMe") {
-    const column = document.getElementById("infoColumn")
-    const name = document.creatElement("div")
-    name.innerHTML = "Will"
-    //const img = document.creatElement("div")
-    return
-  }
   const column = document.getElementById("infoColumn")
   const snapshot = await getDocs(query(collection(db, firingType), orderBy("createdAt", "asc")))
   for(const item of snapshot.docs) {
