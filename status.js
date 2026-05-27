@@ -40,7 +40,7 @@ export const getStatus = async function() {
   const firingTypes = ["glaze", "firstBisque", "secondBisque", "firing"]
   const divVar2 = document.getElementById("centerbox")
   divVar2.style.textContent = "Your piece has been submitted."
-  divVar2.style.backgroundColor = rgba(117, 211, 243, 0.9)
+  divVar2.style.backgroundColor = "rgba(117, 211, 243, 0.9)"
   divVar2.style.boxShadow = "6px 7px 8px rgba(0, 0, 0, 0.172)"
   divVar2.style.borderRadius = "20px"
   for (const firingType of firingTypes) {
